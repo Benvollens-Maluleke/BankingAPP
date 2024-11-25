@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Banking App{% endblock %}
+
+{% block header %}
+<h1>Login</h1>
+{% endblock %}
+
+{% block content %}
+    <style>
+        /* Styling specific to the login form */
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4b9cd3;
+            outline: none;
+        }
+
+        button {
+            background-color: #4b9cd3;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3b8ec1;
+        }
+
+        .flash-messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .flash-messages li {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .flash-messages .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .login-link a {
+            color: #4b9cd3;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- Flash messages for validation errors -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <p class="login-link">Forgot your password? <a href="/forgot_password">Click here</a></p>
+    </div>
+{% endblock %}

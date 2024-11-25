@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<!--<h1>Transaction History</h1>-->
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Styling for Transaction History Page */
+    .transaction-list {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 20px auto;
+        max-width: 900px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .transaction-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 20px;
+        border-bottom: 1px solid #f1f1f1;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 6px;
+        margin: 5px 0;
+    }
+
+    .transaction-item:last-child {
+        border-bottom: none;
+    }
+
+    .transaction-details {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .transaction-date {
+        font-weight: bold;
+        width: 25%;
+        text-align: left;
+        color: #333;
+    }
+
+    .transaction-type {
+        width: 45%;
+        text-align: left;
+        color: #555;
+    }
+
+    .transaction-amount {
+        width: 20%;
+        text-align: right;
+        font-weight: bold;
+        color: #28a745;
+    }
+
+    .no-transactions {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #888;
+        text-align: center;
+    }
+
+    /* Back to Dashboard Button */
+    .back-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 20px auto 60px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .back-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Scroll Down Arrow */
+    .scroll-down {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        z-index: 1000;
+        transition: background-color 0.3s;
+    }
+
+    .scroll-down:hover {
+        background-color: #0056b3;
+    }
+
+    .scroll-down i {
+        font-size: 1.5rem;
+    }
+
+    /* Ensure footer does not overlap content */
+    footer {
+        margin-top: 40px;
+    }
+</style>
+
+<h2>Transaction History</h2>
+{% if transactions %}
+    <div>
+        <ol class="transaction-list">
+            {% for transaction in transactions %}
+                <li class="transaction-item">
+                    <div class="transaction-details">
+                        <span class="transaction-date">{{ transaction['date'] }}</span>
+                        <span class="transaction-type">{{ transaction['type'] }}</span>
+                        <span class="transaction-amount">R{{ transaction['amount'] | default(0) | round(2) }}</span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% else %}
+    <p class="no-transactions">No transactions found.</p>
+{% endif %}
+
+<!-- Back to Dashboard Button -->
+<div style="text-align: center;">
+    <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+</div>
+
+<!-- Scroll Down Arrow -->
+<div class="scroll-down" onclick="scrollToBottom()">
+    <i>&#x2193;</i> <!-- Down arrow symbol -->
+</div>
+
+<script>
+    // Function to scroll to the bottom of the page
+    function scrollToBottom() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+</script>
+{% endblock %}

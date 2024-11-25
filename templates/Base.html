@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BmBank{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            background-image: url('YOUR_IMAGE_URL'); /* Replace with the URL of your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #333;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+
+        .nav-links li a:hover {
+            background-color: #575757;
+        }
+
+        .brand {
+            color: #4CAF50;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        /* About Section Styling */
+        .about-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #4CAF50; /* A vibrant green color that complements the brand color */
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            color: #333; /* A dark color for better contrast with the light background */
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <span class="brand">BmBank</span>
+        <ul class="nav-links">
+            {% if session.account_number %}
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+            {% else %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">LogIn</a></li>
+                <li><a href="/register">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        {% block header %}
+        <h1> <strong>Welcome to BMBANK</strong></h1>
+        {% endblock %}
+    </header>
+
+    <!-- Main content -->
+    <div class="container">
+        {% block content %}
+        {% if request.path == '/' %}
+        <div class="about-section">
+            <h2>About Us</h2>
+            <p>
+                Welcome to BmBank, your trusted partner in modern banking. We are committed to providing
+                innovative financial solutions to help you manage your finances with ease and security.
+                With a customer-first approach, we offer services tailored to your needs, including seamless
+                deposits, withdrawals, transfers, and more. Join us today and experience the difference!
+            </p>
+        </div>
+        {% endif %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        {% block footer %}
+        <p>&copy; 2024 BmBank. All rights reserved.</p>
+        {% endblock %}
+    </div>
+</body>
+</html>
