@@ -42,12 +42,19 @@ def find_user(account_number):
     return users.get(str(account_number))
 
 
-def check_existing_user(phone_number, id_number):
+def check_existing_user(phone_number):
     users = read_users()
     for user in users.values():
-        if user['phone_number'] == phone_number or user['id_number'] == id_number:
+        if user['phone_number'] == phone_number:
             return True
     return False
+
+
+def check_existing_username(username):
+    users = read_users()
+    for user in users.values():
+        if user.get('username', '').lower() == username.lower():
+            return True
 
 
 @app.route('/')
@@ -67,8 +74,17 @@ def register():
         confirm_password = request.form['confirm_password']
 
         # Check if the phone number or ID number already exists
-        if check_existing_user(phone_number, id_number):
-            flash("An account with this phone number or ID number already exists.", 'error')
+        users = read_users()
+        for user in users.values():
+            if user['phone_number'] == phone_number:
+                flash("An account with this phone number already exists.", 'error')
+                return render_template('register.html')
+            if user['id_number'] == id_number:
+                flash("An account with this ID number already exists.", 'error')
+                return render_template('register.html')
+
+        if check_existing_username(username):
+            flash("An account with this username already exist.", 'error')
             return render_template('register.html')
 
         if password != confirm_password:
@@ -76,8 +92,6 @@ def register():
             return render_template('register.html')
 
         account_number = generate_account_number()
-
-        users = read_users()
 
         users[str(account_number)] = {
             "name": name,
@@ -207,7 +221,7 @@ def deposit():
 
     if request.method == 'POST':
         try:
-            amount = float(request.form['amount'])
+            amount = int(request.form['amount'])
         except ValueError:
             flash("Invalid deposit amount!", 'error')
             return render_template('deposit.html')
@@ -249,7 +263,7 @@ def withdraw():
 
     if request.method == 'POST':
         try:
-            amount = float(request.form['amount'])
+            amount = int(request.form['amount'])
         except ValueError:
             flash("Invalid withdraw amount!", 'error')
             return render_template('withdraw.html')
@@ -287,7 +301,7 @@ def transfer():
 
     if request.method == 'POST':
         try:
-            amount = float(request.form['amount'])
+            amount = int(request.form['amount'])
             recipient_account = request.form['recipient_account']
         except ValueError:
             flash("Invalid transfer details.", 'error')

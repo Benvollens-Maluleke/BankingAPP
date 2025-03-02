@@ -225,7 +225,7 @@
         "phone_number": "0836232755",
         "id_number": "0204045107087",
         "password": "123456",
-        "balance": 2675.0,
+        "balance": 2676.5,
         "transaction_history": [
             "Deposited 300.0",
             "Withdrew 100.0",
@@ -270,6 +270,11 @@
                 "date": "2024-11-25 09:06:38",
                 "type": "Withdraw",
                 "amount": 25.0
+            },
+            {
+                "date": "2025-03-02 12:09:47",
+                "type": "Deposit",
+                "amount": 1.5
             }
         ]
     },
@@ -280,8 +285,21 @@
         "phone_number": "0836232755",
         "id_number": "0204045107087",
         "password": "123456",
-        "balance": 0.0,
-        "transaction_history": []
+        "balance": 200.0,
+        "transaction_history": [
+            {
+                "date": "2025-03-02 13:46:14",
+                "type": "Transfer",
+                "amount": 100,
+                "sender": "4237851825"
+            },
+            {
+                "date": "2025-03-02 13:50:42",
+                "type": "Transfer Incoming",
+                "amount": 100,
+                "sender": "4237851825"
+            }
+        ]
     },
     "4237851825": {
         "name": "Voni",
@@ -290,7 +308,7 @@
         "phone_number": "0115673174",
         "id_number": "0004045107081",
         "password": "123456",
-        "balance": 100.0,
+        "balance": 50.0,
         "transaction_history": [
             {
                 "date": "2024-11-22 15:44:36",
@@ -307,6 +325,40 @@
                 "type": "Transfer",
                 "amount": -300.0,
                 "recipient": "7519629452"
+            },
+            {
+                "date": "2025-03-02 13:43:00",
+                "type": "Deposit",
+                "amount": 200
+            },
+            {
+                "date": "2025-03-02 13:46:14",
+                "type": "Transfer",
+                "amount": -100,
+                "recipient": "3381716319"
+            },
+            {
+                "date": "2025-03-02 13:46:57",
+                "type": "Deposit",
+                "amount": 100
+            },
+            {
+                "date": "2025-03-02 13:50:42",
+                "type": "Transfer Outgoing",
+                "amount": -100,
+                "recipient": "3381716319"
+            },
+            {
+                "date": "2025-03-02 13:53:59",
+                "type": "Transfer",
+                "amount": -100,
+                "recipient": "7519629452"
+            },
+            {
+                "date": "2025-03-02 13:54:14",
+                "type": "Transfer",
+                "amount": -50,
+                "recipient": "7519629452"
             }
         ]
     },
@@ -317,7 +369,7 @@
         "phone_number": "0765661952",
         "id_number": "9912136014088",
         "password": "Mahonono#1",
-        "balance": 5290.0,
+        "balance": 5440.0,
         "transaction_history": [
             {
                 "date": "2024-11-22 15:59:36",
@@ -340,7 +392,29 @@
                 "type": "Transfer",
                 "amount": 300.0,
                 "sender": "4237851825"
+            },
+            {
+                "date": "2025-03-02 13:53:59",
+                "type": "Transfer",
+                "amount": 100,
+                "sender": "4237851825"
+            },
+            {
+                "date": "2025-03-02 13:54:14",
+                "type": "Transfer",
+                "amount": 50,
+                "sender": "4237851825"
             }
         ]
+    },
+    "7960431274": {
+        "name": "Benvollens ",
+        "surname": "Maluleke",
+        "username": "Mfanaq",
+        "phone_number": "0115623212",
+        "id_number": "0025325108087",
+        "password": "123456",
+        "balance": 0.0,
+        "transaction_history": []
     }
 }
